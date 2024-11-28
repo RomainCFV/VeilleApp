@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "VeilleApp";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille List</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+</head>
+
+<header class="header">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">VeilleApp</a>
+            <form method="post">
+                <input type="text" name="SearchQuery" placeholder="Search..." />
+            </form>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="veille-container">
+        @foreach (var veille in Model.Veilles)
+        {
+            <div class="veille-block">
+                <div class="publisher">@veille.Publisher</div>
+                <div class="title">@veille.Title</div>
+                <div class="content">@veille.Content</div>
+                <div class="publish-time">@veille.PublishTime.ToString("g")</div>
+                <div class="link"><a href="@veille.Link" target="_blank">Read Article</a></div>
+            </div>
+        }
+    </div>
+</body>

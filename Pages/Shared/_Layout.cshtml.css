@@ -1,0 +1,14 @@
+﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  z-index: 1000; /* Makes sure it's on top of other content */
+}
