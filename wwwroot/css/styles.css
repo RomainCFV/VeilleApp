@@ -8,6 +8,14 @@
     padding: 20px;
 }
 
+.no-result-container {
+    margin-top: 100px;
+    width: max-content;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
 .veille-block {
     position: relative;
     border: 1px solid #ccc;

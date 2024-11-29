@@ -16,22 +16,31 @@
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-page="/Index">VeilleApp</a>
             <form method="post">
-                <input type="text" name="SearchQuery" placeholder="Search..." />
+                <input type="text" name="SearchQuery" placeholder="Rechercher..." />
             </form>
         </div>
     </nav>
 </header>
 <body>
-    <div class="veille-container">
-        @foreach (var veille in Model.Veilles)
-        {
-            <div class="veille-block">
-                <div class="publisher">@veille.Publisher</div>
-                <div class="title">@veille.Title</div>
-                <div class="content">@veille.Content</div>
-                <div class="publish-time">@veille.PublishTime.ToString("g")</div>
-                <div class="link"><a href="@veille.Link" target="_blank">Read Article</a></div>
-            </div>
-        }
-    </div>
+    @if (Model.Veilles.Any())
+    {
+        <div class="veille-container">
+            @foreach (var veille in Model.Veilles)
+            {
+                <div class="veille-block">
+                    <div class="publisher">@veille.Publisher</div>
+                    <div class="title">@veille.Title</div>
+                    <div class="content">@veille.Content</div>
+                    <div class="publish-time">@veille.PublishTime.ToString("g")</div>
+                    <div class="link"><a href="@veille.Link" target="_blank">Lire L'Article</a></div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="no-result-container">
+            <p>Aucun article trouvé.</p>
+        </div>
+    }
 </body>

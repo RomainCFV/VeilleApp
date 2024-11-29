@@ -21,7 +21,9 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        Veilles = await _context.veilles.ToListAsync();
+        Veilles = await _context.veilles
+                        .OrderByDescending(v => v.PublishTime)
+                        .ToListAsync();
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -31,11 +33,15 @@ public class IndexModel : PageModel
             SearchQuery = SearchQuery.ToLower();
             Veilles = await _context.veilles.Where(v => v.Title.ToLower().Contains(SearchQuery) ||
                                     v.Content.ToLower().Contains(SearchQuery) ||
-                                    v.Publisher.ToLower().Contains(SearchQuery)).ToListAsync();
+                                    v.Publisher.ToLower().Contains(SearchQuery))
+                                    .OrderByDescending(v => v.PublishTime)
+                                    .ToListAsync();
         }
         else
         {
-            Veilles = await _context.veilles.ToListAsync();
+            Veilles = await _context.veilles
+                            .OrderByDescending(v => v.PublishTime)
+                            .ToListAsync();
         }
         return Page();
     }
