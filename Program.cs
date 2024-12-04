@@ -10,6 +10,8 @@ builder.Services.AddDbContext<VeilleContext>( options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("VeilleConnection"))
 );
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
