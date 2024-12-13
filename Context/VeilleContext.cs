@@ -12,5 +12,14 @@ namespace VeilleApp.Context
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Veille>()
+                .HasIndex(e => e.Guid)
+                .IsUnique();
+        }
     }
 }

@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddHostedService<DailyJobService>();
 builder.Services.AddDbContext<VeilleContext>( options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("VeilleConnection"))
 );
