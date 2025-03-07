@@ -9,6 +9,7 @@ namespace VeilleApp.Pages;
 public class IndexModel : PageModel
 {
     private readonly VeilleContext _context;
+    private readonly int MaxArticles = 600;
     public IList<Veille> Veilles = new List<Veille>();
     [BindProperty]
     public string SearchQuery { get; set; }  = string.Empty;
@@ -22,6 +23,7 @@ public class IndexModel : PageModel
     {
         Veilles = await _context.veilles
                         .OrderByDescending(v => v.PublishTime)
+                        .Take(MaxArticles)
                         .ToListAsync();
     }
 
@@ -34,12 +36,14 @@ public class IndexModel : PageModel
                                     v.Content.ToLower().Contains(SearchQuery) ||
                                     v.Publisher.ToLower().Contains(SearchQuery))
                                     .OrderByDescending(v => v.PublishTime)
+                                    .Take(MaxArticles)
                                     .ToListAsync();
         }
         else
         {
             Veilles = await _context.veilles
                             .OrderByDescending(v => v.PublishTime)
+                            .Take(MaxArticles)
                             .ToListAsync();
         }
         return Page();

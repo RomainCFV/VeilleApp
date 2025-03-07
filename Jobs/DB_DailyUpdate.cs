@@ -18,7 +18,7 @@ public class DailyJobService : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            var delayTime = TimeSpan.FromMinutes(15);
+            var delayTime = TimeSpan.FromMinutes(1);
             await Task.Delay(delayTime, stoppingToken);
 
             await UpdateDatabaseJob();
@@ -42,9 +42,9 @@ public class DailyJobService : BackgroundService
                 { "ZATAZ", "https://www.zataz.com/feed/" },
                 { "L'Usine Digitale", "https://www.usine-digitale.fr/rss" }
             };
+            
             List<string> CurrentEntries = await dbContext.veilles.Select(v => v.Guid).ToListAsync();
-
-            List<Veille> NewEntries = RSSFeed.FindAllArticles(RSS_Feeds, CurrentEntries);
+            List<Veille> NewEntries = await RSSFeed.FindAllArticles(RSS_Feeds, CurrentEntries);
 
             if (!NewEntries.IsNullOrEmpty())
             {
